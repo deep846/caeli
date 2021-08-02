@@ -92,6 +92,7 @@ class _LocationScreenState extends State<LocationScreen> {
           ),
           constraints: BoxConstraints.expand(),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -145,10 +146,13 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                 ],
               ),
-              // Expanded(child: Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: Image.network('$weathericon',),
-              // ),),
+              Visibility(
+                visible: checker==true?false:true,
+                child: Expanded(child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network('$weathericon',),
+                ),),
+              ),
               Visibility(
                 visible: checker==true?true:false,
                 child: Expanded(
