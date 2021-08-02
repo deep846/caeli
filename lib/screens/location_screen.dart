@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:caeli/services/networking.dart';
 import 'package:flutter/material.dart';
-import 'package:caeli/utilities/constants.dart';
+// import 'package:caeli/utilities/constants.dart';
 import 'package:caeli/services/weather.dart';
 import 'city_screen.dart';
 import 'package:caeli/screens/weatherforstcrust.dart';
@@ -145,7 +145,6 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                 ],
               ),
-
               // Expanded(child: Padding(
               //   padding: const EdgeInsets.all(8.0),
               //   child: Image.network('$weathericon',),
@@ -156,67 +155,65 @@ class _LocationScreenState extends State<LocationScreen> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 15.0),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Column(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                AutoSizeText(
-                                  '$tempareture°C',
-                                  style:TextStyle(
-                                    fontFamily: 'Spartan MB',
-                                    fontSize: 100.0,
-                                  ),
-                                  maxFontSize: 100.0,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 0,
+                              child: AutoSizeText(
+                                '$tempareture°C',
+                                style:TextStyle(
+                                  fontFamily: 'Spartan MB',
+                                  fontSize: MediaQuery.of(context).size.width * 0.2,
                                 ),
-                                // Text(
-                                //   weathericon,
-                                //   style: kConditionTextStyle,
-                                // ),
-                                Image.network('$weathericon',),
-                              ],
-                            ),
-                            ListTile(
-                              leading: Image.network('$weathericon'),
-                              title: Text(des,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                              trailing: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                // crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  // Text('Max: $max°C',style: TextStyle(fontWeight: FontWeight.bold),),
-                                  // Text('Min: $min°C',style: TextStyle(fontWeight: FontWeight.bold),),
-                                  Text('Feels Like:',style: TextStyle(fontWeight: FontWeight.bold),),
-                                  Text('$feel°C',style: TextStyle(fontWeight: FontWeight.bold),),
-                                ],
+                                maxFontSize: 100,
                               ),
                             ),
-                            GestureDetector(
-                                onTap: ()  async{
-                                  var weathrfdata = await weather.getf(flat, flon);
-                                  var polutionweatherdata = await pol.getp(flon, flat);
-                                  // print(polutionweatherdata['list'][0]['main']['aqi']);
-                                  // print(weathrfdata['current']['temp']);
-                                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                                    return Weatherforstcrust(weathrfdata,polutionweatherdata);
-                                  },),);
-                                },
-                                child: Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('Weather Forecast',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),),
-                                    Icon(
-                                      Icons.timelapse,
-                                      size: 50.0,
-                                      color: Colors.white,
-                                    ),
-                                  ],
-                                )
-                            ),
+                            // Text(
+                            //   weathericon,
+                            //   style: kConditionTextStyle,
+                            // ),
+                            Expanded(flex: 0, child: Image.network('$weathericon',)),
                           ],
+                        ),
+                        ListTile(
+                          leading: Image.network('$weathericon'),
+                          title: AutoSizeText(des,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.center,maxLines:1,),
+                          trailing: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              // Text('Max: $max°C',style: TextStyle(fontWeight: FontWeight.bold),),
+                              // Text('Min: $min°C',style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text('Feels Like:',style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text('$feel°C',style: TextStyle(fontWeight: FontWeight.bold),),
+                            ],
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: ()  async{
+                              var weathrfdata = await weather.getf(flat, flon);
+                              var polutionweatherdata = await pol.getp(flon, flat);
+                              // print(polutionweatherdata['list'][0]['main']['aqi']);
+                              // print(weathrfdata['current']['temp']);
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return Weatherforstcrust(weathrfdata,polutionweatherdata);
+                              },),);
+                            },
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded( flex: 0,child: AutoSizeText('Weather Forecast',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),)),
+                                Icon(
+                                  Icons.timelapse,
+                                  size: 50.0,
+                                  color: Colors.white,
+                                ),
+                              ],
+                            )
                         ),
                       ],
                     ),
@@ -227,16 +224,22 @@ class _LocationScreenState extends State<LocationScreen> {
                 flex: 0,
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Text(
+                  child: AutoSizeText(
                     // " djsago;fihgoih oihsdgouihog dgihaergoihaerg asdi9ghaweuioghad asdoghasdgoih ",
                     "$massage in $cityname!",
-                    maxLines:5,
+                    // maxLines:2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
-                    style: kMessageTextStyle,
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 100.0,
+                      fontFamily: 'Spartan MB',
+                    ),
+                    // textAlign: TextAlign.center,
                   ),
                 ),
-              ),
+                ),
             ],
           ),
         ),

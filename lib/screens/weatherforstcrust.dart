@@ -355,7 +355,11 @@ class _WeatherforstcrustState extends State<Weatherforstcrust> {
                         AutoSizeText(
                           'Weather Pollutant Details',
                           maxLines: 1,
-                          style: kButtonTextStyle,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 100.0,
+                            fontFamily: 'Spartan MB',
+                          ),
                           textAlign: TextAlign.center,
                         ),
                         getpoldata('CO', 'Carbon monoxide', 'co'),
